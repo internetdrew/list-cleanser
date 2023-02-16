@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <>
       <section className='bg-[#ede0d4] h-screen overflow-y-hidden relative'>
-        <div className='text-center py-10'>
+        <div className='text-center my-10'>
           <h1 className='text-xl sm:text-2xl'>ListCleanser</h1>
           <p className='text-lg sm:text-xl'>
             Make your favorite cuss-up-music playlists family-friendly(ish).
