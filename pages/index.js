@@ -1,28 +1,27 @@
 import { signOut, useSession } from 'next-auth/react';
+import useSpotify from '@/hooks/useSpotify';
+import { useEffect, useState } from 'react';
+import Playlists from '@/components/Playlists';
 
 export default function Home() {
-  const { data: session } = useSession();
+  const spotifyApi = useSpotify();
+  const { data: session, status } = useSession();
+  const [playlists, setPlaylists] = useState([]);
   console.log(session);
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi.getUserPlaylists().then(data => {
+        setPlaylists(data.body.items);
+      });
+    }
+  }, [session, spotifyApi]);
 
   return (
     <>
-      <section className='bg-[#ede0d4] h-screen overflow-y-hidden relative'>
-        <h1>Hi, {session?.user?.name}</h1>
-        <div className='text-center my-10'>
-          <h1 className='text-xl sm:text-2xl'>ListCleanser</h1>
-          <p className='text-lg sm:text-xl'>
-            Make your favorite cuss-up-music playlists family-friendly(ish).
-          </p>
-        </div>
-        <div className='text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-          <a
-            href=''
-            className='p-2 border-solid border-2 border-black text-sm sm:text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)]'
-          >
-            Login to Spotify
-          </a>
-        </div>
-      </section>
+      <div className='bg-[#ede0d4] h-screen flex flex-col justify-center items-center'>
+        <Playlists playlists={playlists} />
+      </div>
     </>
   );
 }

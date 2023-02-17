@@ -16,7 +16,6 @@ const login = ({ providers }) => {
             key={provider.name}
             className='text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
           >
-            {/* {console.log(providers)} */}
             <button
               href=''
               className='p-2 border-solid border-2 border-black text-sm sm:text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'
