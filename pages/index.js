@@ -1,7 +1,13 @@
+import { signOut, useSession } from 'next-auth/react';
+
 export default function Home() {
+  const { data: session } = useSession();
+  console.log(session);
+
   return (
     <>
       <section className='bg-[#ede0d4] h-screen overflow-y-hidden relative'>
+        <h1>Hi, {session?.user?.name}</h1>
         <div className='text-center my-10'>
           <h1 className='text-xl sm:text-2xl'>ListCleanser</h1>
           <p className='text-lg sm:text-xl'>
